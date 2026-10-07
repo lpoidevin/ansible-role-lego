@@ -89,6 +89,16 @@
     dest: /usr/local/sbin/lego-deploy-hook.sh
     mode: "0750"
 
+- name: Allow the lego to reload/restart systemd services
+  community.general.sudoers:
+    name: lego-systemd-services
+    state: present
+    user: "{{ lego_user }}"
+    runas: root
+    commands:
+      - /usr/bin/systemctl reload *.service
+      - /usr/bin/systemctl restart *.service
+
 - name: Check if Lego certificate metadata exists
   ansible.builtin.stat:
     path: "{{ lego_home }}/certificates/{{ item.key }}.json"
