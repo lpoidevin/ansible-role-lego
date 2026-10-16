@@ -19,7 +19,6 @@
     dest: /usr/local/sbin/
     remote_src: true
     keep_newer: true
-    creates: /usr/local/sbin/lego
     mode: "0755"
     extra_opts:
       - lego
